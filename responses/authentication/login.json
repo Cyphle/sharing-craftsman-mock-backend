@@ -1,0 +1,6 @@
+{
+  "username": "john@doe.fr",
+  "accessToken": "aaa",
+  "refreshToken": "bbb",
+  "expirationDate": 1514631600000
+}

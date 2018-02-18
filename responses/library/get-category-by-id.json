@@ -1,0 +1,12 @@
+{
+  "id": "bbb",
+  "name": "SOLID",
+  "knowledges": [
+    {
+      "id": "kaa",
+      "creator": "john@doe.fr",
+      "title": "My knowledge",
+      "content": "My content"
+    }
+  ]
+}

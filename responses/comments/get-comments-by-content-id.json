@@ -1,0 +1,16 @@
+[
+  {
+    "id": "caa",
+    "commenter": "john@doe.fr",
+    "contentType": "KNOWLEDGE",
+    "contentId": "aaa",
+    "content": "My comment"
+  },
+  {
+    "id": "cbb",
+    "commenter": "john@doe.fr",
+    "contentType": "CATEGORY",
+    "contentId": "bbb",
+    "content": "My other comment"
+  }
+]
