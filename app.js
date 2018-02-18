@@ -1,17 +1,18 @@
-import express from 'express';
-import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+
+const MockBackEndApplication = require('./server/MockBackEndApplication');
 
 // Default config
 const app = express();
-app.use(logger('dev'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 /* APPLICATION */
-
+let application = new MockBackEndApplication(app);
+application.bootstrapAPI();
 
 console.log('========== ***** ==========');
 console.log('SHARING CRAFTSMAN MOCK BACK-END HAS STARTED');
@@ -58,4 +59,4 @@ app.use((err, req, res, next) => {
   });
 });
 
-export default app;
+module.exports = app;

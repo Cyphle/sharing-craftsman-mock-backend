@@ -1,0 +1,8 @@
+{
+  "roles": [
+    {
+      "name": "ROLE_USER"
+    }
+  ],
+  "name": "SUPER_ADMINS"
+}

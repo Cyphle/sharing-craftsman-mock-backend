@@ -1,0 +1,26 @@
+{
+  "username": "john@doe.fr",
+  "password": null,
+  "firstname": "John",
+  "lastname": "Doe",
+  "email": "john@doe.fr",
+  "website": "www.johndoe.fr",
+  "github": "github.com/johndoe",
+  "linkedin": "linkedin.com/johndoe",
+  "authorizations": {
+    "groups": [
+      {
+        "roles": [
+          {
+            "name": "ROLE_USER"
+          }
+        ],
+        "name": "USERS"
+      }
+    ]
+  },
+  "creationDate": null,
+  "lastUpdateDate": null,
+  "picture": "picture.jpg",
+  "active": true
+}

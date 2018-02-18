@@ -1,0 +1,9 @@
+{
+  "firstname": "John",
+  "lastname": "Doe",
+  "email": "john@doe.fr",
+  "website": "www.johndoe.fr",
+  "github": "http://github.com/Johndoe",
+  "linkedin": "linkedin.com/johndoe",
+  "picture": "picture.jpg"
+}

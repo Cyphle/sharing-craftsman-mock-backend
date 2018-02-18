@@ -1,0 +1,14 @@
+{
+  "roles": [
+    {
+      "name": "ROLE_ROOT"
+    },
+    {
+      "name": "ROLE_ADMIN"
+    },
+    {
+      "name": "ROLE_USER"
+    }
+  ],
+  "name": "SUPER_ADMINS"
+}
