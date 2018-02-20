@@ -3,11 +3,13 @@
 const loginToken = require('../../responses/authentication/login.json');
 const refreshToken = require('../../reponses/refresh-token.json');
 
+const AuthenticationManager = require('../domain/user/AuthenticationManager');
+
 module.exports = class AuthenticationController {
-  constructor(app, headerService, authenticationRepository) {
+  constructor(app, headerService) {
     this.app = app;
     this.headerService = headerService;
-    this.authenticationManager = new authenticationManager(authenticationRepository);
+    this.authenticationManager = new AuthenticationManager();
   }
 
   activateRoutes() {
