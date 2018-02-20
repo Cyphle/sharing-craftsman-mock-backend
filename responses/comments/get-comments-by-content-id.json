@@ -9,8 +9,8 @@
   {
     "id": "cbb",
     "commenter": "john@doe.fr",
-    "contentType": "CATEGORY",
-    "contentId": "bbb",
+    "contentType": "KNOWLEDGE",
+    "contentId": "aaa",
     "content": "My other comment"
   }
 ]
