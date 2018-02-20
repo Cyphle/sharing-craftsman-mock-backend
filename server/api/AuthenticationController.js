@@ -1,7 +1,7 @@
 'use strict';
 
 const loginToken = require('../../responses/authentication/login.json');
-const refreshToken = require('../../reponses/refresh-token.json');
+const refreshToken = require('../../responses/authentication/refresh-token.json');
 
 const AuthenticationManager = require('../domain/user/AuthenticationManager');
 
@@ -35,14 +35,14 @@ module.exports = class AuthenticationController {
 
   logout() {
     this.app.get('/tokens/logout', (req, res) => {
-      res.send();
+      res.send(200);
     });
   }
 
   verifyToken() {
     this.app.get('/tokens/verify', (req, res) => {
       if (this.headerService.isClientAuthorized(req.headers) && this.authenticationManager.verifyToken(req.headers)) {
-        res.send();
+        res.send(200);
       } else {
         res.status(403);
         res.send('Unauthorized');

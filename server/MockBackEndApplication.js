@@ -14,6 +14,10 @@ const LibraryController = require('./api/LibraryController');
 const ScoreController = require('./api/ScoreController');
 const AuthenticationController = require('./api/AuthenticationController');
 const AuthorizationController = require('./api/AuthorizationController');
+const ClientController = require('./api/ClientController');
+const FileController = require('./api/FileController');
+const UserController = require('./api/UserController');
+const AdminController = require('./api/AdminController');
 
 module.exports = class MockBackEndApplication {
   constructor(app) {
@@ -36,5 +40,14 @@ module.exports = class MockBackEndApplication {
     this.routers['authentication'].activateRoutes();
     this.routers['authorization'] = new AuthorizationController(this.app, this.headerService);
     this.routers['authorization'].activateRoutes();
+    this.routers['client'] = new ClientController(this.app);
+    this.routers['client'].activateRoutes();
+    this.routers['file'] = new FileController(this.app);
+    this.routers['file'].activateRoutes();
+    this.routers['user'] = new UserController(this.app, this.headerService);
+    this.routers['user'].activateRoutes();
+
+    this.routers['admin'] = new AdminController(this.app, this.headerService);
+    this.routers['admin'].activateRoutes();
   }
 }

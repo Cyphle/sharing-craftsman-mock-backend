@@ -66,7 +66,7 @@ module.exports = class LibraryController {
     this.app.post('/library/categories', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.libraryManager.createCategory(req.body);
-        res.send();
+        res.send(200);
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -78,7 +78,7 @@ module.exports = class LibraryController {
     this.app.post('/library/knowledges', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.libraryManager.createKnowledge(req.body);
-        res.send();
+        res.send(200);
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -90,7 +90,7 @@ module.exports = class LibraryController {
     this.app.put('/library/categories', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.libraryManager.updateCategory(req.body);
-        res.send();
+        res.send(200);
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -102,7 +102,7 @@ module.exports = class LibraryController {
     this.app.put('/library/knowledges', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.libraryManager.updateKnowledge(req.body);
-        res.send();
+        res.send(200);
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -114,7 +114,7 @@ module.exports = class LibraryController {
     this.app.delete('/library/categories', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.libraryManager.deleteCategory(req.body);
-        res.send();
+        res.send(200);
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -126,7 +126,7 @@ module.exports = class LibraryController {
     this.app.delete('/library/knowledges', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.libraryManager.deleteKnowledge(req.body);
-        res.send();
+        res.send(200);
       } else {
         res.status(403);
         res.send('Unauthorized');

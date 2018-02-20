@@ -52,7 +52,7 @@ module.exports = class CommentController {
     this.app.post('/comments', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.commentManager.addComment(req.body);
-        res.send();
+        res.send(200);
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -64,7 +64,7 @@ module.exports = class CommentController {
     this.app.put('/comments', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.commentManager.updateComment(req.body);
-        res.send();
+        res.send(200);
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -76,7 +76,7 @@ module.exports = class CommentController {
     this.app.delete('/comments', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.commentManager.deleteComment(req.body);
-        res.send();
+        res.send(200);
       } else {
         res.status(403);
         res.send('Unauthorized');

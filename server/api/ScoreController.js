@@ -1,7 +1,7 @@
 'use strict';
 
 const scoresByContentId = require('../../responses/scores/get-scores-by-content-id.json');
-const scoresByMark = require('../../responses/scores/get-scores-by_mark.json');
+const scoresByMark = require('../../responses/scores/get-scores-by-mark.json');
 
 const ScoreManager = require('../domain/library/ScoreManager');
 
@@ -25,7 +25,7 @@ module.exports = class ScoreController {
       if (this.headerService.isUserAuthorized(req.headers)) {
         if (req.params.id === 'aaa')
           res.send(scoresByContentId);
-        res.send();
+        res.send(200);
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -38,7 +38,7 @@ module.exports = class ScoreController {
       if (this.headerService.isUserAuthorized(req.headers)) {
         if (req.params.mark === '4')
           res.send(scoresByMark);
-        res.send();
+        res.send(200);
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -50,7 +50,7 @@ module.exports = class ScoreController {
     this.app.post('/scores', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.scoreManager.createScore(req.body);
-        res.send();
+        res.send(200);
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -62,7 +62,7 @@ module.exports = class ScoreController {
     this.app.put('/scores', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.scoreManager.updateScore(req.body);
-        res.send();
+        res.send(200);
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -74,7 +74,7 @@ module.exports = class ScoreController {
     this.app.delete('/scores', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.scoreManager.deleteScore(req.body);
-        res.send();
+        res.send(200);
       } else {
         res.status(403);
         res.send('Unauthorized');
