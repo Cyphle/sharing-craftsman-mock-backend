@@ -11,7 +11,10 @@ module.exports = class AuthenticationController {
   }
 
   activateRoutes() {
-    
+    this.login();
+    this.logout();
+    this.verifyToken();
+    this.refreshToken();
   }
 
   login() {

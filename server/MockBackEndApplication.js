@@ -12,6 +12,7 @@ const CommentController = require('./api/CommentController');
 const FavoriteController = require('./api/FavoriteController');
 const LibraryController = require('./api/LibraryController');
 const ScoreController = require('./api/ScoreController');
+const AuthenticationController = require('./api/AuthenticationController');
 
 module.exports = class MockBackEndApplication {
   constructor(app) {
@@ -29,5 +30,8 @@ module.exports = class MockBackEndApplication {
     this.routers['library'].activateRoutes();
     this.routers['score'] = new ScoreController(this.app, this.headerService, new ScoreRepository());
     this.routers['score'].activateRoutes();
+
+    this.routers['authentication'] = new AuthenticationController(this.app, this.headerService);
+    this.routers['authentication'].activateRoutes();
   }
 }
