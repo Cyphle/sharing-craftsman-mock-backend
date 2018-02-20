@@ -3,7 +3,7 @@
 const scoresByContentId = require('../../responses/scores/get-scores-by-content-id.json');
 const scoresByMark = require('../../responses/scores/get-scores-by_mark.json');
 
-const ScoreManager = require('../domain/scores/ScoreManager');
+const ScoreManager = require('../domain/library/ScoreManager');
 
 module.exports = class ScoreController {
   constructor(app, headerService, scoreRepository) {

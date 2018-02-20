@@ -1,7 +1,7 @@
 'use strict';
 
 const searchedFavorites = require('../../responses/favorites/search-favorites-by-username.json');
-const FavoriteManager = require('../domain/favorites/FavoriteManager');
+const FavoriteManager = require('../domain/library/FavoriteManager');
 
 module.exports = class FavoriteController {
   constructor(app, headerService, favoriteRepository) {

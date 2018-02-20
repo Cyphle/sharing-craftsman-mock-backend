@@ -2,7 +2,8 @@
 
 const commentsByContentId = require('../../responses/comments/get-comments-by-content-id.json');
 const commentById = require('../../responses/comments/get-comments-by-id.json');
-const CommentManager = require('../domain/comments/CommentManager');
+
+const CommentManager = require('../domain/library/CommentManager');
 
 module.exports = class CommentController {
   constructor(app, headerService, commentRepository) {

@@ -11,4 +11,8 @@ module.exports = class HeaderService {
     
     return true;
   }
+
+  isClientAuthorized(headers) {
+    return true;
+  }
 }
