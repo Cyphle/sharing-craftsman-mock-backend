@@ -18,6 +18,7 @@ module.exports = class FileController {
     this.changePassword();
     this.updateProfile();
     this.getLostPasswordToken();
+    this.changeLostPassword();
   }
 
   registerUser() {
@@ -73,6 +74,17 @@ module.exports = class FileController {
     this.app.get('/users/lost-password', (req, res) => {
       if (this.headerService.isClientAuthorized(req.headers)) {
         res.send(lostPassworrdToken);
+      } else {
+        res.status(403);
+        res.send('Unauthorized');
+      }
+    });
+  }
+
+  changeLostPassword() {
+    this.app.post('/users/change-lost-password', (req, res) => {
+      if (this.headerService.isUserAuthorized(req.headers) && this.userManager.validateChangeLostPassword(req.body)) {
+        res.send(200);
       } else {
         res.status(403);
         res.send('Unauthorized');

@@ -16,7 +16,13 @@ module.exports = class UserManager {
   }
 
   validateChangePassword(changePassword) {
-    if (changePassword.oldPassword && changePassword.newPassword)
+    if (changePassword.changePasswordToken && changePassword.oldPassword && changePassword.newPassword)
+      return true;
+    return false;
+  }
+
+  validateChangeLostPassword() {
+    if (changePassword.changePasswordToken && changePassword.newPassword)
       return true;
     return false;
   }
