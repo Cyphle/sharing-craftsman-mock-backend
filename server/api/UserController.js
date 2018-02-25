@@ -6,10 +6,10 @@ const lostPassworrdToken = require('../../responses/user/get-lost-password-token
 const UserManager = require('../domain/user/UserManager');
 
 module.exports = class FileController {
-  constructor(app, headerService) {
+  constructor(app, headerService, userRepository) {
     this.app = app;
     this.headerService = headerService;
-    this.userManager = new UserManager();
+    this.userManager = new UserManager(userRepository);
   }
 
   activateRoutes() {
@@ -22,16 +22,14 @@ module.exports = class FileController {
 
   registerUser() {
     this.app.post('/users/register', (req, res) => {
-      console.log(`${new Date()} -- [UserController] Register user - Headers: ${JSON.stringify(req.headers)}`);
-      console.log(`${new Date()} -- [UserController] Register user - Body: ${JSON.stringify(req.body)}`);
+      console.log(`${new Date()} -- [UserController] Register user - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.body)}`);
       if (this.headerService.isClientAuthorized(req.headers) && this.userManager.isUserValid(req.body)) {
         console.log(`${new Date()} -- [UserController] Register user successful`);
+        this.userManager.registerUser({ username: req.body.username, password: req.body.password });
         res.status(200);
         res.send({});
       } else {
-        console.log(`${new Date()} -- [UserController] Register user forbidden`);
-        console.log(`${new Date()} -- [UserController] Register user - Client authorization: ${this.headerService.isClientAuthorized(req.headers)}`);
-        console.log(`${new Date()} -- [UserController] Register user - User validity: ${this.userManager.isUserValid(req.body)}`);
+        console.log(`${new Date()} -- [UserController] Register user forbidden - Client authorization: ${this.headerService.isClientAuthorized(req.headers)}, User validity: ${this.userManager.isUserValid(req.body)}`);
         res.status(403);
         res.send('Unauthorized');
       }

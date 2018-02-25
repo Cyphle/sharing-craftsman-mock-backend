@@ -7,6 +7,8 @@ const CommentRepository = require('./infra/CommentRepository');
 const FavoriteRepository = require('./infra/FavoriteRepository');
 const LibraryRepository = require('./infra/LibraryRepository');
 const ScoreRepository = require('./infra/ScoreRepository');
+const UserRepository = require('./infra/UserRepository');
+const TokenRepository = require('./infra/TokenRepository');
 
 const CommentController = require('./api/CommentController');
 const FavoriteController = require('./api/FavoriteController');
@@ -36,7 +38,8 @@ module.exports = class MockBackEndApplication {
     this.routers['score'] = new ScoreController(this.app, this.headerService, new ScoreRepository());
     this.routers['score'].activateRoutes();
 
-    this.routers['authentication'] = new AuthenticationController(this.app, this.headerService);
+    const userRepository = new UserRepository();
+    this.routers['authentication'] = new AuthenticationController(this.app, this.headerService, userRepository, new TokenRepository());
     this.routers['authentication'].activateRoutes();
     this.routers['authorization'] = new AuthorizationController(this.app, this.headerService);
     this.routers['authorization'].activateRoutes();
@@ -44,7 +47,7 @@ module.exports = class MockBackEndApplication {
     this.routers['client'].activateRoutes();
     this.routers['file'] = new FileController(this.app);
     this.routers['file'].activateRoutes();
-    this.routers['user'] = new UserController(this.app, this.headerService);
+    this.routers['user'] = new UserController(this.app, this.headerService, userRepository);
     this.routers['user'].activateRoutes();
 
     this.routers['admin'] = new AdminController(this.app, this.headerService);

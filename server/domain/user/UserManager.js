@@ -1,6 +1,14 @@
 'use strict';
 
 module.exports = class UserManager {
+  constructor(userRepository) {
+    this.userRepository = userRepository;
+  }
+
+  registerUser(user) {
+    this.userRepository.add(user);
+  }
+  
   isUserValid(user) {
     if (user.username && user.password)
       return true;

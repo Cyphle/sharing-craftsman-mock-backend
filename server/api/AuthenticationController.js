@@ -6,10 +6,10 @@ const refreshToken = require('../../responses/authentication/refresh-token.json'
 const AuthenticationManager = require('../domain/user/AuthenticationManager');
 
 module.exports = class AuthenticationController {
-  constructor(app, headerService) {
+  constructor(app, headerService, userRepository, tokenRepository) {
     this.app = app;
     this.headerService = headerService;
-    this.authenticationManager = new AuthenticationManager();
+    this.authenticationManager = new AuthenticationManager(userRepository, tokenRepository);
   }
 
   activateRoutes() {
@@ -21,12 +21,16 @@ module.exports = class AuthenticationController {
 
   login() {
     this.app.post('/tokens/login', (req, res) => {
+      console.log(`${new Date()} -- [AuthenticationController] Login user - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.body)}`);
       if (this.headerService.isClientAuthorized(req.headers)) {
         if (this.authenticationManager.login(req.body)) {
+          console.log(`${new Date()} -- [AuthenticationController] Login successful`);
+          this.authenticationManager.saveToken(loginToken);
           res.send(loginToken);
         }
         res.send({});
       } else {
+        console.log(`${new Date()} -- [UserController] Register user forbidden - Client authorization: ${this.headerService.isClientAuthorized(req.headers)}, Login validity: ${this.authenticationManager.login(req.body)}`);
         res.status(403);
         res.send('Unauthorized');
       }
