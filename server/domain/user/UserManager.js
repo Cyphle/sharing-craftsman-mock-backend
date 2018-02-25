@@ -2,7 +2,7 @@
 
 module.exports = class UserManager {
   isUserValid(user) {
-    if (user.username === 'john@doe.fr' && user.password === 'password')
+    if (user.username && user.password)
       return true;
     return false;
   }
