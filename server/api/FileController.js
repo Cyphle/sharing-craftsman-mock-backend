@@ -33,6 +33,7 @@ module.exports = class FileController {
           console.log(`${new Date()} -- [FileController] Upload file - Error: ${err}`);
           res.send({ code: 500, response: 'File not accepted' });
         }
+        console.log(`${new Date()} -- [FileController] Upload successful`);
         res.send({ code: 200 });
       });
     });
