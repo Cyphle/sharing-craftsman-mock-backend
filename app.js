@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(cookieParser());
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
 
 /* APPLICATION */
 let application = new MockBackEndApplication(app);
