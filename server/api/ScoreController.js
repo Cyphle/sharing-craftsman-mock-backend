@@ -71,7 +71,7 @@ module.exports = class ScoreController {
   }
 
   deleteScore() {
-    this.app.delete('/scores', (req, res) => {
+    this.app.post('/scores/delete', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.scoreManager.deleteScore(req.body);
         res.send(200);

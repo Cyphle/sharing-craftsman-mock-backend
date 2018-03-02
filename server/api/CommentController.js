@@ -73,7 +73,7 @@ module.exports = class CommentController {
   }
 
   deleteComment() {
-    this.app.delete('/comments', (req, res) => {
+    this.app.post('/comments/delete', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.commentManager.deleteComment(req.body);
         res.send(200);

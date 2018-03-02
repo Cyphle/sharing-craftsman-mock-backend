@@ -111,9 +111,9 @@ module.exports = class LibraryController {
   }
 
   deleteCategory() {
-    this.app.delete('/library/categories', (req, res) => {
+    this.app.delete('/library/categories/{categoryId}', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
-        this.libraryManager.deleteCategory(req.body);
+        this.libraryManager.deleteCategory(req.params.categoryId);
         res.send(200);
       } else {
         res.status(403);
@@ -123,7 +123,7 @@ module.exports = class LibraryController {
   }
 
   deleteKnowledge() {
-    this.app.delete('/library/knowledges', (req, res) => {
+    this.app.post('/library/knowledges/delete', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.libraryManager.deleteKnowledge(req.body);
         res.send(200);
