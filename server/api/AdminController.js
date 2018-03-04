@@ -69,7 +69,7 @@ module.exports = class AdminController {
   }
 
   deleteUser() {
-    this.app.delete('/admin/users/{username}', (req, res) => {
+    this.app.delete('/admin/users/:username', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers) && req.params.username) {
         res.send(200);
       } else {

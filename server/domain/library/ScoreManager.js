@@ -7,6 +7,10 @@ module.exports = class ScoreManager {
     this.scoreRepository = scoreRepository;
   }
 
+  getScores(contentId) {
+    return this.scoreRepository.findByContentId(contentId);
+  }
+
   createScore(score) {
     this.verifyScore(score);
     score.id = uuidv1();

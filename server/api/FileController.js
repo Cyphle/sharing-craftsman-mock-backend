@@ -13,7 +13,7 @@ module.exports = class FileController {
   }
 
   getFile() {
-    this.app.get('/files/{filename:.+}', (req, res) => {
+    this.app.get('/files/:filename', (req, res) => {
       console.log(`${new Date()} -- [FileController] Get file - Headers: ${JSON.stringify(req.headers)} -- Param: ${req.params.filename}`);
       res.send('https://www.wanimo.com/veterinaire/images/articles/chat/chaton-qui-miaule.jpg');
     });

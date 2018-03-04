@@ -21,11 +21,9 @@ module.exports = class ScoreController {
   }
 
   getScoresByContentId() {
-    this.app.get('/score/contentId/{id}', (req, res) => {
+    this.app.get('/scores/contentId/:id', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
-        if (req.params.id === 'aaa')
-          res.send(scoresByContentId);
-        res.send(200);
+        res.send(this.scoreManager.getScores(req.params.id));
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -34,7 +32,7 @@ module.exports = class ScoreController {
   }
 
   getScoresByMark() {
-    this.app.get('/scores/mar/{mark}', (req, res) => {
+    this.app.get('/scores/mar/:mark', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         if (req.params.mark === '4')
           res.send(scoresByMark);

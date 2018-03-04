@@ -7,6 +7,10 @@ module.exports = class CommentManager {
     this.commentRepository = commentRepository;
   }
 
+  getComments(contentId) {
+    return this.commentRepository.findByContentId(contentId);
+  }
+
   addComment(comment) {
     this.verifyNewComment(comment);
     comment.id = uuidv1();

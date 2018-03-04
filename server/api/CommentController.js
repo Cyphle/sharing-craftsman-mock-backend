@@ -21,12 +21,9 @@ module.exports = class CommentController {
   }
 
   getCommentsByContentId() {
-    this.app.get('/comments/contentid/{id}', (req, res) => {
+    this.app.get('/comments/contentId/:id', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
-        if (req.params.id === 'aaa') {
-          res.send(commentsByContentId);
-        }
-        res.send([]);
+        res.send(this.commentManager.getComments(req.params.id));
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -35,7 +32,7 @@ module.exports = class CommentController {
   }
 
   getCommentById() {
-    this.app.get('/comments/{id}', (req, res) => {
+    this.app.get('/comments/:id', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         if (req.params.id === 'caa') {
           res.send(commentById);

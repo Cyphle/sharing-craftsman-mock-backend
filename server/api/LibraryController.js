@@ -37,7 +37,7 @@ module.exports = class LibraryController {
   }
 
   getCategoryById() {
-    this.app.get('/library/{id}', (req, res) => {
+    this.app.get('/library/:id', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         if (req.params.id === 'bbb')
           res.send(categoryById);
@@ -111,7 +111,7 @@ module.exports = class LibraryController {
   }
 
   deleteCategory() {
-    this.app.delete('/library/categories/{categoryId}', (req, res) => {
+    this.app.delete('/library/categories/:categoryId', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.libraryManager.deleteCategory(req.params.categoryId);
         res.send(200);

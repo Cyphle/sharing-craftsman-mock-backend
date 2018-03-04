@@ -42,7 +42,7 @@ module.exports = class FavoriteController {
   }
 
   deleteFavorite() {
-    this.app.post('/favorites/delet', (req, res) => {
+    this.app.post('/favorites/delete', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.favoriteManager.deleteFavorite(req.body);
         res.send([]);
