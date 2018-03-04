@@ -18,9 +18,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 let application = new MockBackEndApplication(app);
 application.bootstrapAPI();
 
-console.log('========== ***** ==========');
+console.log('========== ****** ==========');
 console.log('SHARING CRAFTSMAN MOCK BACK-END HAS STARTED ON PORT 3000');
-console.log('========== ***** ==========');
+console.log('========== ****** ==========');
 /* END APPLICATION */
 
 function shouldCompress(req, res) {
