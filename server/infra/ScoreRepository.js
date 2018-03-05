@@ -16,6 +16,41 @@ module.exports = class ScoreRepository {
         contentType: 'CATEGORY',
         contentId: 'bbb',
         mark: 5
+      },
+      saa: {
+        id: 'saa',
+        giver: 'John Doe',
+        contentType: 'KNOWLEDGE',
+        contentId: 'kaa',
+        mark: 5
+      },
+      sbb: {
+        id: 'sbb',
+        giver: 'John Doe',
+        contentType: 'KNOWLEDGE',
+        contentId: 'kbb',
+        mark: 5
+      },
+      sab: {
+        id: 'sab',
+        giver: 'John Doe',
+        contentType: 'KNOWLEDGE',
+        contentId: 'kcc',
+        mark: 5
+      },
+      sac: {
+        id: 'sac',
+        giver: 'Foo Bar',
+        contentType: 'KNOWLEDGE',
+        contentId: 'kcc',
+        mark: 3
+      },
+      sbd: {
+        id: 'sbd',
+        giver: 'John Doe',
+        contentType: 'KNOWLEDGE',
+        contentId: 'kcd',
+        mark: 5
       }
     };
   }
