@@ -27,8 +27,10 @@ module.exports = class LibraryController {
 
   getAllCategories() {
     this.app.get('/library', (req, res) => {
+      console.log(`${new Date()} -- [LibraryController] Get all categories - Headers: ${JSON.stringify(req.headers)}`);
       if (this.headerService.isUserAuthorized(req.headers)) {
-        res.send(allCategories);
+        console.log(`${new Date()} -- [UserController] All categories: ${JSON.stringify(this.libraryManager.getAllCategories())}`);
+        res.send(this.libraryManager.getAllCategories());
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -51,11 +53,12 @@ module.exports = class LibraryController {
 
   searchCategories() {
     this.app.post('/library/search', (req, res) => {
+      console.log(`${new Date()} -- [LibraryController] Search categories - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.body)}`);
       if (this.headerService.isUserAuthorized(req.headers)) {
-        if (req.body.searchKeys.KnowledgeTitle === 'know' && req.body.searchKeys.CategoryName === 'Arch')
-          res.send(searchedCategories);
-        res.send({})
+        console.log(`${new Date()} -- [LibraryController] Found categories: ${JSON.stringify(this.libraryManager.searchCategories(req.body))}`);
+        res.send(this.libraryManager.searchCategories(req.body));
       } else {
+        console.log(`${new Date()} -- [LibraryController] Error search categories`);
         res.status(403);
         res.send('Unauthorized');
       }
@@ -64,10 +67,14 @@ module.exports = class LibraryController {
 
   createCategory() {
     this.app.post('/library/categories', (req, res) => {
+      console.log(`${new Date()} -- [LibraryController] Create new category - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.body)}`);
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.libraryManager.createCategory(req.body);
-        res.send(200);
+        console.log(`${new Date()} -- [LibraryController] Category created`);
+        res.status(200);
+        res.send();
       } else {
+        console.log(`${new Date()} -- [LibraryController] Error while creating category`);
         res.status(403);
         res.send('Unauthorized');
       }
@@ -76,10 +83,14 @@ module.exports = class LibraryController {
 
   createKnowledge() {
     this.app.post('/library/knowledges', (req, res) => {
+      console.log(`${new Date()} -- [LibraryController] Create knowledge - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.body)}`);
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.libraryManager.createKnowledge(req.body);
-        res.send(200);
+        console.log(`${new Date()} -- [LibraryController] Knwoledge created`);
+        res.status(200);
+        res.send();
       } else {
+        console.log(`${new Date()} -- [LibraryController] Error while creating knowledge`);
         res.status(403);
         res.send('Unauthorized');
       }

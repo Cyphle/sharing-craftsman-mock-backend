@@ -7,33 +7,47 @@ module.exports = class LibraryManager {
     this.libraryRepository = libraryRepository;
   }
 
+  getAllCategories() {
+    return this.libraryRepository.getAll();
+  }
+
+  searchCategories(criteria) {
+    let categories = this.libraryRepository.getAll();
+    if (criteria.searchKeys.CategoryName)
+      categories = categories.filter(category => category.name.indexOf(criteria.searchKeys.CategoryName) !== -1);
+    return categories;
+  }
+
   createCategory(category) {
     this.verifyCategory(category);
     category.id = uuidv1();
-    category.knowledges = {};
+    category.knowledges = [];
     this.libraryRepository.add(category);
   }
 
   createKnowledge(knowledge) {
     this.verifyKnowledge();
     var knowledgeCategory = this.libraryRepository.getById(knowledge.categoryId);
+    
     knowledge.id = uuidv1();
-    knowledgeCategory.knowledges[knowledge.id] = knowledge;
-    this.libraryRepository.save(knowledgeCategory);
+    if (knowledge.creator.length === 0)
+      knowledge.creator = 'john@doe.fr';
+    knowledgeCategory.knowledges.push(knowledge);
+    this.libraryRepository.add(knowledgeCategory);
   }
 
   updateCategory(category) {
     this.verifyCategory(category);
     var categoryToUpdate = this.libraryRepository.getById(category.id);
     categoryToUpdate.name = category.name;
-    this.libraryRepository.save(categoryToUpdate);
+    this.libraryRepository.add(categoryToUpdate);
   }
 
   updateKnowledge(knowledge) {
     this.verifyKnowledge(knowledge);
     var categoryToUpdate = this.libraryRepository.getById(knowledge.categoryId);
     categoryToUpdate.knowledges[knowledge.id] = knowledge;
-    this.libraryRepository.save(categoryToUpdate);
+    this.libraryRepository.add(categoryToUpdate);
   }
 
   deleteCategory(category) {
@@ -43,7 +57,7 @@ module.exports = class LibraryManager {
   deleteKnowledge(knowledge) {
     var categoryToUpdate = this.libraryRepository.getById(knowledge.categoryId);
     delete categoryToUpdate.knowledges[knowledge.id];
-    this.libraryRepository.save(categoryToUpdate);
+    this.libraryRepository.add(categoryToUpdate);
   }
 
   verifyCategory(favorite) {
