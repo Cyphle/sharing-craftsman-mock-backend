@@ -14,6 +14,8 @@ module.exports = class CommentManager {
   addComment(comment) {
     this.verifyNewComment(comment);
     comment.id = uuidv1();
+    if (comment.commenter.length === 0)
+      comment.commenter = 'john@doe.fr';
     this.commentRepository.addComment(comment);
   }
 

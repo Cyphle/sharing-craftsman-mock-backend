@@ -22,6 +22,7 @@ module.exports = class CommentController {
 
   getCommentsByContentId() {
     this.app.get('/comments/contentId/:id', (req, res) => {
+      console.log(`${new Date()} -- [CommentController] Get comments by content id - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.body)}`);
       if (this.headerService.isUserAuthorized(req.headers)) {
         res.send(this.commentManager.getComments(req.params.id));
       } else {
@@ -47,10 +48,14 @@ module.exports = class CommentController {
 
   createNewComment() {
     this.app.post('/comments', (req, res) => {
+      console.log(`${new Date()} -- [CommentController] Create new comment - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.body)}`);
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.commentManager.addComment(req.body);
-        res.send(200);
+        console.log(`${new Date()} -- [CommentController] Comment created`);
+        res.status(200);
+        res.send();
       } else {
+        console.log(`${new Date()} -- [CommentController] Error while creating comment`);
         res.status(403);
         res.send('Unauthorized');
       }

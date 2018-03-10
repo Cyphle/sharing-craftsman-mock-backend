@@ -22,6 +22,7 @@ module.exports = class ScoreController {
 
   getScoresByContentId() {
     this.app.get('/scores/contentId/:id', (req, res) => {
+      console.log(`${new Date()} -- [ScoreController] Get scores by content id - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.body)}`);
       if (this.headerService.isUserAuthorized(req.headers)) {
         res.send(this.scoreManager.getScores(req.params.id));
       } else {
@@ -46,9 +47,12 @@ module.exports = class ScoreController {
 
   createScore() {
     this.app.post('/scores', (req, res) => {
+      console.log(`${new Date()} -- [ScoreController] Create new score - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.body)}`);
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.scoreManager.createScore(req.body);
-        res.send(200);
+        console.log(`${new Date()} -- [ScoreController] Score created`);
+        res.status(200);
+        res.send();
       } else {
         res.status(403);
         res.send('Unauthorized');
