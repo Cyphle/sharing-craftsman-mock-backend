@@ -40,11 +40,26 @@ module.exports = class LibraryController {
 
   getCategoryById() {
     this.app.get('/library/:id', (req, res) => {
+      console.log(`${new Date()} -- [LibraryController] Get category by id - Headers: ${JSON.stringify(req.headers)}`);
       if (this.headerService.isUserAuthorized(req.headers)) {
-        if (req.params.id === 'bbb')
-          res.send(categoryById);
-        res.send({})
+        console.log(`${new Date()} -- [LibraryController] Category: ${JSON.stringify(this.libraryManager.getCategoryById(req.params.id))}`);
+        res.send(this.libraryManager.getCategoryById(req.params.id));
       } else {
+        console.log(`${new Date()} -- [LibraryController] Error while getting category by id`);
+        res.status(403);
+        res.send('Unauthorized');
+      }
+    });
+  }
+
+  getKnowledgeById() {
+    this.app.get('/library/knowledges/:id', (req, res) => {
+      console.log(`${new Date()} -- [LibraryController] Get knowledge by id - Headers: ${JSON.stringify(req.headers)}`);
+      if (this.headerService.isUserAuthorized(req.headers)) {
+        console.log(`${new Date()} -- [LibraryController] Knowledge: ${JSON.stringify(this.libraryManager.getKnowledgeById(req.params.id))}`);
+        res.send(this.libraryManager.getKnowledgeById(req.params.id));
+      } else {
+        console.log(`${new Date()} -- [LibraryController] Error while getting knowledge by id`);
         res.status(403);
         res.send('Unauthorized');
       }

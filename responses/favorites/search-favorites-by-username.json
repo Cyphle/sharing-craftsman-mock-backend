@@ -3,6 +3,12 @@
         "id": "saa",
         "username": "john@doe.fr",
         "contentType": "KNOWLEDGE",
+        "contentId": "kcc"
+    },
+    {
+        "id": "sab",
+        "username": "john@doe.fr",
+        "contentType": "CATEGORY",
         "contentId": "aaa"
     }
 ]

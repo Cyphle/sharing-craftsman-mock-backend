@@ -11,6 +11,25 @@ module.exports = class LibraryManager {
     return this.libraryRepository.getAll();
   }
 
+  getCategoryById(id) {
+    return this.libraryRepository
+      .getAll()
+      .filter(category => category.id === id);
+  }
+
+  getKnowledgeById(id) {
+    const categories = this.libraryRepository.getAll();
+    const knowledge = {};
+    categories.forEach(category => {
+      category.knowledges.forEach(k => {
+        if (k.id === id) {
+          knowledge = k;
+        }
+      });
+    });
+    return knowledge;
+  }
+
   searchCategories(criteria) {
     let categories = this.libraryRepository.getAll();
     if (criteria.searchKeys.CategoryName)
@@ -53,7 +72,7 @@ module.exports = class LibraryManager {
       knowledgeToUpdate.creator = knowledge.creator;
     knowledgeToUpdate.title = knowledge.title;
     knowledgeToUpdate.content = knowledge.content,
-    this.libraryRepository.add(categoryToUpdate);
+      this.libraryRepository.add(categoryToUpdate);
   }
 
   deleteCategory(category) {
