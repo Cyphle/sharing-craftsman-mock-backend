@@ -28,7 +28,7 @@ module.exports = class LibraryManager {
   createKnowledge(knowledge) {
     this.verifyKnowledge();
     var knowledgeCategory = this.libraryRepository.getById(knowledge.categoryId);
-    
+
     knowledge.id = uuidv1();
     if (knowledge.creator.length === 0)
       knowledge.creator = 'john@doe.fr';
@@ -45,18 +45,24 @@ module.exports = class LibraryManager {
 
   updateKnowledge(knowledge) {
     this.verifyKnowledge(knowledge);
-    var categoryToUpdate = this.libraryRepository.getById(knowledge.categoryId);
-    categoryToUpdate.knowledges[knowledge.id] = knowledge;
+    const categoryToUpdate = this.libraryRepository.getById(knowledge.categoryId);
+    const knowledgeToUpdate = categoryToUpdate.knowledges.find(catKnowledge => catKnowledge.id === knowledge.id);
+    if (knowledge.creator.length === 0)
+      knowledgeToUpdate.creator = 'john@doe.fr';
+    else
+      knowledgeToUpdate.creator = knowledge.creator;
+    knowledgeToUpdate.title = knowledge.title;
+    knowledgeToUpdate.content = knowledge.content,
     this.libraryRepository.add(categoryToUpdate);
   }
 
   deleteCategory(category) {
-    this.libraryRepository.delete(category.id);
+    this.libraryRepository.delete(category);
   }
 
   deleteKnowledge(knowledge) {
     var categoryToUpdate = this.libraryRepository.getById(knowledge.categoryId);
-    delete categoryToUpdate.knowledges[knowledge.id];
+    categoryToUpdate.knowledges = categoryToUpdate.knowledges.filter(k => k.id !== knowledge.id);
     this.libraryRepository.add(categoryToUpdate);
   }
 

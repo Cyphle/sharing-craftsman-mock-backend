@@ -99,10 +99,14 @@ module.exports = class LibraryController {
 
   updateCategory() {
     this.app.put('/library/categories', (req, res) => {
+      console.log(`${new Date()} -- [LibraryController] Update category - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.body)}`);
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.libraryManager.updateCategory(req.body);
-        res.send(200);
+        console.log(`${new Date()} -- [LibraryController] Category updated`);
+        res.status(200);
+        res.send();
       } else {
+        console.log(`${new Date()} -- [LibraryController] Error while updating category`);
         res.status(403);
         res.send('Unauthorized');
       }
@@ -111,10 +115,14 @@ module.exports = class LibraryController {
 
   updateKnowledge() {
     this.app.put('/library/knowledges', (req, res) => {
+      console.log(`${new Date()} -- [LibraryController] Update knowledge - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.body)}`);
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.libraryManager.updateKnowledge(req.body);
-        res.send(200);
+        console.log(`${new Date()} -- [LibraryController] Knowledge updated`);
+        res.status(200);
+        res.send();
       } else {
+        console.log(`${new Date()} -- [LibraryController] Error while updating knowledge`);
         res.status(403);
         res.send('Unauthorized');
       }
@@ -123,10 +131,14 @@ module.exports = class LibraryController {
 
   deleteCategory() {
     this.app.delete('/library/categories/:categoryId', (req, res) => {
+      console.log(`${new Date()} -- [LibraryController] Delete category - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.body)}`);
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.libraryManager.deleteCategory(req.params.categoryId);
-        res.send(200);
+        console.log(`${new Date()} -- [LibraryController] Category deleted`);
+        res.status(200);
+        res.send();
       } else {
+        console.log(`${new Date()} -- [LibraryController] Error while deleting category`);
         res.status(403);
         res.send('Unauthorized');
       }
@@ -135,10 +147,14 @@ module.exports = class LibraryController {
 
   deleteKnowledge() {
     this.app.post('/library/knowledges/delete', (req, res) => {
+      console.log(`${new Date()} -- [LibraryController] Delete knowledge - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.body)}`);
       if (this.headerService.isUserAuthorized(req.headers)) {
         this.libraryManager.deleteKnowledge(req.body);
-        res.send(200);
+        console.log(`${new Date()} -- [LibraryController] Knowledge deleted`);
+        res.status(200);
+        res.send();
       } else {
+        console.log(`${new Date()} -- [LibraryController] Error while deleting knowledge`);
         res.status(403);
         res.send('Unauthorized');
       }
