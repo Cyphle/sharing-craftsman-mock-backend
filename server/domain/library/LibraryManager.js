@@ -14,20 +14,21 @@ module.exports = class LibraryManager {
   getCategoryById(id) {
     return this.libraryRepository
       .getAll()
-      .filter(category => category.id === id);
+      .filter(category => category.id === id)[0];
   }
 
   getKnowledgeById(id) {
     const categories = this.libraryRepository.getAll();
-    const knowledge = {};
+    let foundCategory = {};
     categories.forEach(category => {
-      category.knowledges.forEach(k => {
-        if (k.id === id) {
-          knowledge = k;
+      category.knowledges.forEach(knowledge => {
+        if (knowledge.id === id) {
+          foundCategory = category;
+          foundCategory.knowledges = [knowledge];
         }
       });
     });
-    return knowledge;
+    return foundCategory;
   }
 
   searchCategories(criteria) {

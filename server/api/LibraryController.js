@@ -16,6 +16,7 @@ module.exports = class LibraryController {
   activateRoutes() {
     this.getAllCategories();
     this.getCategoryById();
+    this.getKnowledgeById();
     this.searchCategories();
     this.createCategory();
     this.createKnowledge();

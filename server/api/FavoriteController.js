@@ -18,11 +18,12 @@ module.exports = class FavoriteController {
 
   searchFavorites() {
     this.app.post('/favorites/search', (req, res) => {
+      console.log(`${new Date()} -- [FavoriteController] Get Favorites - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.bodu)}`);
       if (this.headerService.isUserAuthorized(req.headers)) {
-        if (req.body.username === 'john@doe.fr')
-          res.send(searchedFavorites);
-        res.send([]);
+        console.log(`${new Date()} -- [FavoriteController] Favorites: ${searchedFavorites}`);
+        res.send(searchedFavorites);
       } else {
+        console.log(`${new Date()} -- [FavoriteController] Error while getting favorites`);
         res.status(403);
         res.send('Unauthorized');
       }
