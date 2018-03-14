@@ -7,6 +7,10 @@ module.exports = class FavoriteManager {
     this.favoriteRepository = favoriteRepository;
   }
 
+  getFavorites() {
+    return this.favoriteRepository.getAll();
+  }
+
   createFavorite(favorite) {
     this.verifyFavorite(favorite);
     favorite.id = uuidv1();
@@ -14,9 +18,7 @@ module.exports = class FavoriteManager {
   }
 
   deleteFavorite(favorite) {
-    const favoriteToDelete = this.favoriteRepository.getById(favorite.id);
-    if (favorite.username === favoriteToDelete.username)
-      this.favoriteRepository.delete(favorite.id);
+    this.favoriteRepository.delete(favorite.id);
   }
 
   verifyFavorite(favorite) {
