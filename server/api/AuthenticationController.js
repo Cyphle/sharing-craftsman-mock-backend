@@ -22,13 +22,10 @@ module.exports = class AuthenticationController {
   login() {
     this.app.post('/tokens/login', (req, res) => {
       console.log(`${new Date()} -- [AuthenticationController] Login user - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.body)}`);
-      if (this.headerService.isClientAuthorized(req.headers)) {
-        if (this.authenticationManager.login(req.body)) {
-          console.log(`${new Date()} -- [AuthenticationController] Login successful`);
-          this.authenticationManager.saveToken(loginToken);
-          res.send(loginToken);
-        }
-        res.send({});
+      if (this.headerService.isClientAuthorized(req.headers) && this.authenticationManager.login(req.body)) {
+        console.log(`${new Date()} -- [AuthenticationController] Login successful`);
+        this.authenticationManager.saveToken(loginToken);
+        res.send(loginToken);
       } else {
         console.log(`${new Date()} -- [UserController] Register user forbidden - Client authorization: ${this.headerService.isClientAuthorized(req.headers)}, Login validity: ${this.authenticationManager.login(req.body)}`);
         res.status(403);

@@ -2,7 +2,13 @@
 
 module.exports = class UserRepository {
   constructor() {
-    this.data = {};
+    this.data = {
+      'john@doe.fr': {
+        username: 'john@doe.fr',
+        lastname: 'Doe',
+        firstname: 'John'
+      }
+    };
   }
 
   add(user) {
