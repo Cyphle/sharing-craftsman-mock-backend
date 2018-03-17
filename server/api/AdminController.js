@@ -47,7 +47,7 @@ module.exports = class AdminController {
   }
 
   deleteAuthorization() {
-    this.app.delete('/admin/roles/groups', (req, res) => {
+    this.app.post('/admin/roles/groups/delete', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers) && this.adminManager.validateGroup(req.body)) {
         res.send(200);
       } else {
@@ -113,7 +113,7 @@ module.exports = class AdminController {
   }
 
   deleteGroupFromUser() {
-    this.app.delete('/admin/users/groups', (req, res) => {
+    this.app.post('/admin/users/groups/delete', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers) && this.adminManager.validateAddedGroup(req.bdoy)) {
         res.send(200);
       } else {

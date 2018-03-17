@@ -54,7 +54,7 @@
 --> RESPONSE
 
 
-==> DELETE /admin/roles/groups
+==> POST /admin/roles/groups/delete
 --> HEADERS
 - "client": "client"
 - "secret": "clientsecret"
