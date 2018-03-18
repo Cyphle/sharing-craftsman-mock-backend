@@ -7,17 +7,6 @@
         }
       ],
       "name": "USERS"
-    },
-    {
-      "roles": [
-        {
-          "name": "ROLE_USER"
-        },
-        {
-          "name": "ROLE_ADMIN"
-        }
-      ],
-      "name": "ADMINS"
     }
   ]
 }

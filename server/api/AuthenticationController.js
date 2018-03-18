@@ -45,7 +45,8 @@ module.exports = class AuthenticationController {
       console.log(`${new Date()} -- [AuthenticationController] Verify token - Headers: ${JSON.stringify(req.headers)}`);
       if (this.headerService.isClientAuthorized(req.headers) && this.authenticationManager.verifyToken(req.headers)) {
         console.log(`${new Date()} -- [AuthenticationController] Valid token`);
-        res.send(200);
+        res.status(200);
+        res.send();
       } else {
         console.log(`${new Date()} -- [AuthenticationController] Invalid token`);
         res.status(403);
