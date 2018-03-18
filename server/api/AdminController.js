@@ -3,13 +3,13 @@
 const allAuthorizations = require('../../responses/admin/get-groups.json');
 const allUsers = require('../../responses/admin/get-users.json');
 
-const AdminManager = require('../domain/user/AdminManager');
+const AdminManager = require('../domain/AdminManager');
 
 module.exports = class AdminController {
-  constructor(app, headerService) {
+  constructor(app, headerService, adminRepository) {
     this.app = app;
     this.headerService = headerService;
-    this.adminManager = new AdminManager();
+    this.adminManager = new AdminManager(adminRepository);
   }
 
   activateRoutes() {
@@ -26,8 +26,10 @@ module.exports = class AdminController {
 
   getAllAuthorizations() {
     this.app.get('/admin/roles/groups', (req, res) => {
+      console.log(`${new Date()} -- [AdminController] Get authorizations - Headers: ${JSON.stringify(req.headers)}`);
       if (this.headerService.isUserAuthorized(req.headers)) {
-        res.send(allAuthorizations);
+        console.log(`${new Date()} -- [AdminController] Authorizations: ${JSON.stringify(this.adminManager.getAuthorizations())}`);
+        res.send(this.adminManager.getAuthorizations());
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -37,9 +39,14 @@ module.exports = class AdminController {
 
   createAuthorization() {
     this.app.post('/admin/roles/groups', (req, res) => {
+      console.log(`${new Date()} -- [AdminController] Create authorization - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.body)}`);
       if (this.headerService.isUserAuthorized(req.headers) && this.adminManager.validateGroup(req.body)) {
-        res.send(200);
+        this.adminManager.createAuthorization(req.body);
+        console.log(`${new Date()} -- [AdminController] Authorization created`);
+        res.status(200);
+        res.send();
       } else {
+        console.log(`${new Date()} -- [AdminController] Error while creating authorization`);
         res.status(403);
         res.send('Unauthorized');
       }
@@ -48,9 +55,14 @@ module.exports = class AdminController {
 
   deleteAuthorization() {
     this.app.post('/admin/roles/groups/delete', (req, res) => {
+      console.log(`${new Date()} -- [AdminController] Delete authorization - Headers: ${JSON.stringify(req.headers)} -- Body: ${JSON.stringify(req.body)}`);
       if (this.headerService.isUserAuthorized(req.headers) && this.adminManager.validateGroup(req.body)) {
-        res.send(200);
+        this.adminManager.deleteAuthorization(req.body);
+        console.log(`${new Date()} -- [AdminController] Authorization delete`);
+        res.status(200);
+        res.send();
       } else {
+        console.log(`${new Date()} -- [AdminController] Error while deleting authorization`);
         res.status(403);
         res.send('Unauthorized');
       }
@@ -71,7 +83,8 @@ module.exports = class AdminController {
   deleteUser() {
     this.app.delete('/admin/users/:username', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers) && req.params.username) {
-        res.send(200);
+        res.status(200);
+        res.send();
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -82,7 +95,8 @@ module.exports = class AdminController {
   updateUser() {
     this.app.put('/admin/users', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers) && this.adminManager.validateUser(req.bdoy)) {
-        res.send(200);
+        res.status(200);
+        res.send();
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -93,7 +107,8 @@ module.exports = class AdminController {
   createUser() {
     this.app.post('/admin/users', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers) && this.adminManager.validateUser(req.bdoy)) {
-        res.send(200);
+        res.status(200);
+        res.send();
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -104,7 +119,8 @@ module.exports = class AdminController {
   addGroupToUser() {
     this.app.post('/admin/users/groups', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers) && this.adminManager.validateAddedGroup(req.bdoy)) {
-        res.send(200);
+        res.status(200);
+        res.send();
       } else {
         res.status(403);
         res.send('Unauthorized');
@@ -115,7 +131,8 @@ module.exports = class AdminController {
   deleteGroupFromUser() {
     this.app.post('/admin/users/groups/delete', (req, res) => {
       if (this.headerService.isUserAuthorized(req.headers) && this.adminManager.validateAddedGroup(req.bdoy)) {
-        res.send(200);
+        res.status(200);
+        res.send();
       } else {
         res.status(403);
         res.send('Unauthorized');

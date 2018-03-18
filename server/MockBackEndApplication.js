@@ -9,6 +9,7 @@ const LibraryRepository = require('./infra/LibraryRepository');
 const ScoreRepository = require('./infra/ScoreRepository');
 const UserRepository = require('./infra/UserRepository');
 const TokenRepository = require('./infra/TokenRepository');
+const AdminRepository = require('./infra/AdminRepository');
 
 const CommentController = require('./api/CommentController');
 const FavoriteController = require('./api/FavoriteController');
@@ -50,7 +51,7 @@ module.exports = class MockBackEndApplication {
     this.routers['user'] = new UserController(this.app, this.headerService, userRepository);
     this.routers['user'].activateRoutes();
 
-    this.routers['admin'] = new AdminController(this.app, this.headerService);
+    this.routers['admin'] = new AdminController(this.app, this.headerService, new AdminRepository());
     this.routers['admin'].activateRoutes();
   }
 }
